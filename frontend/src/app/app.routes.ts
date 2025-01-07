@@ -12,13 +12,13 @@ import { RoomDetailsComponent } from './room-details/room-details.component';
 import { GuestDetailsComponent } from './guest-details/guest-details.component';
 import { ReservationDetailsComponent } from './reservation-details/reservation-details.component';
 
-const roomsPath: string = 'rooms';
-const guestsPath: string = 'guests';
-const reservationsPath: string = 'reservations';
+export const roomsPath: string = 'rooms';
+export const guestsPath: string = 'guests';
+export const reservationsPath: string = 'reservations';
 
-const createPath: string = 'create';
-const detailsPath: string = ':id';
-const editPath: string = 'edit';
+export const createPath: string = 'create';
+export const detailsPath: string = ':id';
+export const editPath: string = 'edit';
 
 export const routes: Routes = [
   {

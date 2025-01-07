@@ -1,27 +1,14 @@
 <tui-root>
-<div >
-
-  <main >
-    	<header tuiNavigationHeader>
-
-        <!-- <sidebar-navigator >
-        </sidebar-navigator> -->
-	    <span tuiNavigationLogo>
-        <!--TODO replace wih logo-->
-	        <tui-icon icon="@tui.home" />
-	        <span tuiFade>A very very long product name</span>
-
-	    </span>
-
-
-
-
-
-	</header>
-  <sidebar-navigator></sidebar-navigator>
-    <router-outlet />
-  </main>
-</div>
+  <header tuiNavigationHeader>
+    <span tuiNavigationLogo>
+      <tui-icon icon="@tui.hotel" />
+      <span tuiFade>Avant Hotel</span>
+    </span>
+  </header>
+  <div [style.display]="'flex'">
+    <sidebar-navigator />
+    <main tuiNavigationMain>
+      <router-outlet />
+    </main>
+  </div>
 </tui-root>
-
-
