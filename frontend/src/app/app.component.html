@@ -1,21 +1,27 @@
 <tui-root>
+<div >
 
-<div class="app-container">
-  <div class="position-relative">
-    <sidebar-navigator
-      [isSidebarCollapsed]="isSidebarCollapsed"
-      (sidebarToggle)="onSidebarToggle()"
-    >
-    </sidebar-navigator>
+  <main >
+    	<header tuiNavigationHeader>
 
-  </div>
+        <!-- <sidebar-navigator >
+        </sidebar-navigator> -->
+	    <span tuiNavigationLogo>
+        <!--TODO replace wih logo-->
+	        <tui-icon icon="@tui.home" />
+	        <span tuiFade>A very very long product name</span>
 
-  <main class="content" [ngClass]="{ 'content-expanded': isSidebarCollapsed }">
-    <div class="content-inner">Content goes here</div>
+	    </span>
+
+
+
+
+
+	</header>
+  <sidebar-navigator></sidebar-navigator>
     <router-outlet />
   </main>
 </div>
-
 </tui-root>
 
 

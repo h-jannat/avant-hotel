@@ -1,29 +1,86 @@
-<div class="sidebar">
-  <div class="sidebar-header">
-    <a href="#" class="sidebar-logo">Hotel Reservation System</a>
-  </div>
-  <div class="sidebar-menu">
-    <ul>
-      <ng-container *ngFor="let item of menuItems">
-        <li class="sidebar-menu-item">
-          <a
-            href="#"
-            class="sidebar-item"
+<!-- <button
+title="Menu"
+tuiIconButton
+tuiNavigationDrawer
+type="button"
+[(open)]="open"
+>
+<tui-data-list>
+    <tui-opt-group
+        *ngFor="let group of drawer | keyvalue"
+        [label]="group.key"
+    >
+        <button
+            *ngFor="let item of group.value"
+            tuiOption
+            type="button"
+            (click)="open = false"
+        >
+            <tui-icon
+                alt="icon"
+              [icon]="item.icon"
+            />
+            {{ item.label }}
+        </button>
+    </tui-opt-group>
+
+</tui-data-list>
+
+</button> -->
+<div [style.display]="'flex'">
+  <aside
+      [style.height.rem]="27"
+      [tuiNavigationAside]="expanded"
+  >
+      <header>
+          <button
+              iconStart="@tui.home"
+              tuiAsideItem
+              type="button"
+          >
+              <span tuiFade>A very very long product name</span>
+          </button>
+      </header>
+
+      <tui-aside-group
+      *ngFor="let item of drawer"
+      >
+          <button
+                          iconStart="@tui.{{item.icon}}"
+              tuiAsideItem
+              tuiChevron
+              type="button"
+
 
           >
-          <tui-icon
-          icon="@tui.{{item.icon}}"
-          [style.color]="'var(--tui-background-accent-1)'"
-      />
-            <span class="sidebar-item-text">{{ item.label }}</span>
-            <i
-              *ngIf="item.children"
-              class="fas fa-chevron-down sidebar-item-arrow"
-            ></i>
-          </a>
+          {{item.label}}
+              <ng-template>
+                  <a
+                      tuiAsideItem
 
-        </li>
-      </ng-container>
-    </ul>
-  </div>
+                      [routerLink]="item.path"
+                  >
+
+                        All {{item.label}}s
+
+                    </a>
+                  <a
+                      tuiAsideItem
+                      type="button"
+                      routerLink="{{item.path}}/create"
+                  >
+
+                    Create {{item.label}}
+
+                  </a>
+
+              </ng-template>
+          </button>
+      </tui-aside-group>
+
+
+
+
+
+  </aside>
 </div>
