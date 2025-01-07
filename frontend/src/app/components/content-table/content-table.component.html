@@ -1,0 +1,39 @@
+<div>
+  <table tuiTable [style.width.rem]="75">
+    <caption tuiCaption>
+      <span>{{ totalItems }}</span>
+      <button
+        appearance="flat"
+        tuiButton
+        tuiButtonSelect
+        type="button"
+        [(ngModel)]="size"
+      >
+        {{ index * size + 1 }}-{{ (index + 1) * size }} rows
+        <!-- <tui-data-list-wrapper
+          *tuiTextfieldDropdown
+          [itemContent]="content"
+          [items]="currentRange"
+        /> -->
+      </button>
+      <tui-pagination
+        [length]="length"
+        [style.float]="'right'"
+        [(index)]="index"
+      />
+    </caption>
+    <thead>
+      <tr tuiThGroup>
+        <th tuiTh *ngFor="let headName of tableHeads">{{ headName }}</th>
+      </tr>
+    </thead>
+    <tbody tuiTbody>
+      <tr *ngFor="let item of objectValues(data)">
+        <td tuiTd tuiTd *ngFor="let value of objectValues(item)">
+          {{ value }}
+        </td>
+        <!-- <td tuiTd>{{ item.balance | tuiFormatNumber | async }}</td> -->
+      </tr>
+    </tbody>
+  </table>
+</div>
