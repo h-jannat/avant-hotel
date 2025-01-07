@@ -1,0 +1,29 @@
+<div class="sidebar">
+  <div class="sidebar-header">
+    <a href="#" class="sidebar-logo">Hotel Reservation System</a>
+  </div>
+  <div class="sidebar-menu">
+    <ul>
+      <ng-container *ngFor="let item of menuItems">
+        <li class="sidebar-menu-item">
+          <a
+            href="#"
+            class="sidebar-item"
+
+          >
+          <tui-icon
+          icon="@tui.{{item.icon}}"
+          [style.color]="'var(--tui-background-accent-1)'"
+      />
+            <span class="sidebar-item-text">{{ item.label }}</span>
+            <i
+              *ngIf="item.children"
+              class="fas fa-chevron-down sidebar-item-arrow"
+            ></i>
+          </a>
+
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<tui-root>
+
+<div class="app-container">
+  <div class="position-relative">
+    <sidebar-navigator
+      [isSidebarCollapsed]="isSidebarCollapsed"
+      (sidebarToggle)="onSidebarToggle()"
+    >
+    </sidebar-navigator>
+
+  </div>
+
+  <main class="content" [ngClass]="{ 'content-expanded': isSidebarCollapsed }">
+    <div class="content-inner">Content goes here</div>
+    <router-outlet />
+  </main>
+</div>
+
+</tui-root>
+
+
