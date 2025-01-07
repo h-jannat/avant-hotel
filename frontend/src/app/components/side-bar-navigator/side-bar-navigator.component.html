@@ -1,0 +1,28 @@
+<aside [style.height.rem]="27" [tuiNavigationAside]="expanded">
+  <header>
+    <button iconStart="@tui.home" tuiAsideItem type="button">
+      <span tuiFade>Home</span>
+    </button>
+  </header>
+
+  <tui-aside-group *ngFor="let item of drawer">
+    <button
+      iconStart="@tui.{{ item.icon }}"
+      tuiAsideItem
+      tuiChevron
+      type="button"
+    >
+      {{ item.label }}
+      <ng-template>
+        <a tuiAsideItem [routerLink]="item.path"> All {{ item.label }}s </a>
+        <a
+          tuiAsideItem
+          type="button"
+          routerLink="{{ item.path }}/{{ createItemPath }}"
+        >
+          Create {{ item.label }}
+        </a>
+      </ng-template>
+    </button>
+  </tui-aside-group>
+</aside>
