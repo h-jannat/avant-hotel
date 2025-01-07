@@ -1,1 +1,12 @@
-<p>guests works!</p>
+<div>
+  <app-page-header title="Guests"></app-page-header>
+  <div style="height: 30px"></div>
+  <app-content-table
+    [tableHeads]="tableHeads"
+    [data]="data"
+    [index]="index"
+    [size]="size"
+    [length]="length"
+    [totalItems]="totalItems"
+  />
+</div>
