@@ -1,0 +1,10 @@
+initialize knex:
+npx knex init -x ts
+moved knexfile.ts to src/db/knexfile.ts
+ad script named knex: ".\\node_modules\\.bin\\knex --knexfile src\\db\\knexfile.ts"
+
+    generate migration: npm run knex migrate:make create_guests_table
+    run migrations: npm run knex migrate:latest
+    undo all: npm run knex migrate:refresh
+    generate seed file: npm run knex seed:make seed_guests_table
+    run seeds: npm run knex seed:run
