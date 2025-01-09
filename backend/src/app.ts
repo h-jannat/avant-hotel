@@ -5,7 +5,7 @@ import { pino } from "pino";
 
 // import { openAPIRouter } from "@/api-docs/openAPIRouter";
 
-import { roomRouter } from "@/api/room/roomRouter";
+import { roomRouter } from "@/api/rooms/roomRouter";
 import errorHandler from "@/common/middleware/errorHandler";
 import rateLimiter from "@/common/middleware/rateLimiter";
 import requestLogger from "@/common/middleware/requestLogger";
@@ -27,7 +27,7 @@ app.use(rateLimiter);
 app.use(requestLogger);
 
 // Routes
-app.use("/users", roomRouter);
+app.use("/rooms", roomRouter);
 
 // // Swagger UI
 // app.use(openAPIRouter);

@@ -7,4 +7,8 @@ export const roomRouter: Router = express.Router();
 
 roomRouter.get("/", roomController.getAllRooms);
 
-roomRouter.get("/:id", roomController.getUser);
+roomRouter.get("/:id", roomController.createRoom);
+
+roomRouter.post("", roomController.createRoom);
+
+roomRouter.patch("/:id", roomController.updateRoom);

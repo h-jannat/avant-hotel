@@ -1,3 +1,8 @@
+Run:
+    development: npm run dev
+
+
+
 initialize knex:
 npx knex init -x ts
 moved knexfile.ts to src/db/knexfile.ts
