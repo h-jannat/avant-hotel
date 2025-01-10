@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "tsx  watch --clear-screen=false src/index.ts | pino-pretty",
-    "build": "tsup",
+    "build": "tsc --build",
     "start": "node dist/index.js",
     "knex": "npx knex --knexfile src\\db\\knexfile_cli.ts"
   },
@@ -34,8 +34,8 @@
     "@types/node": "^22.10.5",
     "nodemon": "^3.1.9",
     "pino-pretty": "^13.0.0",
-    "tsup": "^8.3.5",
     "tsx": "^4.19.2",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
   }
 }
