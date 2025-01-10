@@ -1,6 +1,7 @@
-import { NgForOf } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { NgForOf, SlicePipe } from '@angular/common';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TuiTable } from '@taiga-ui/addon-table';
 import { TuiContext, TuiStringHandler } from '@taiga-ui/cdk/types';
 import { TuiButton, TuiFormatNumberPipe, TuiTextfield } from '@taiga-ui/core';
@@ -23,11 +24,14 @@ import {
     TuiTable,
     TuiTextfield,
     ContentTableComponent,
+    SlicePipe,
   ],
   templateUrl: './content-table.component.html',
   styleUrl: './content-table.component.less',
 })
 export class ContentTableComponent {
+  constructor(private router: Router, private route: ActivatedRoute) {}
+
   @Input()
   tableHeads: string[] = [];
   @Input() data = [{}];
@@ -35,9 +39,18 @@ export class ContentTableComponent {
   @Input() totalItems: number = 0;
   @Input() length: number = 0;
   @Input() size: number = 10;
+  @Output() onPageChange = new EventEmitter<number>();
 
   protected objectValues = Object.values;
   protected readonly content: TuiStringHandler<TuiContext<number>> = ({
     $implicit,
   }) => `${$implicit} items per page`;
+
+  goToPage(page: number) {
+    this.onPageChange.emit(page);
+  }
+
+  navigateTo(item: any) {
+    this.router.navigate([item.id], { relativeTo: this.route });
+  }
 }

@@ -20,6 +20,7 @@
         [length]="length"
         [style.float]="'right'"
         [(index)]="index"
+        (indexChange)="goToPage($event)"
       />
     </caption>
     <thead>
@@ -28,8 +29,12 @@
       </tr>
     </thead>
     <tbody tuiTbody>
-      <tr *ngFor="let item of objectValues(data)">
-        <td tuiTd tuiTd *ngFor="let value of objectValues(item)">
+      <tr
+        *ngFor="let item of objectValues(data)"
+        (click)="navigateTo(item)"
+        style="cursor: pointer"
+      >
+        <td tuiTd tuiTd *ngFor="let value of objectValues(item) | slice : 1">
           {{ value }}
         </td>
         <!-- <td tuiTd>{{ item.balance | tuiFormatNumber | async }}</td> -->
