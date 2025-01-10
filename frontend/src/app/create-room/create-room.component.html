@@ -1,1 +1,29 @@
-<p>create-room works!</p>
+<form
+  tuiAppearance="outline"
+  tuiCardLarge
+  tuiForm="m"
+  [formGroup]="form"
+  [style.max-width.rem]="32"
+>
+  <header tuiHeader="s">
+    <h2>Create a new room</h2>
+  </header>
+  <tui-textfield>
+    <label tuiLabel>Name</label>
+    <input formControlName="name" placeholder="VIP" tuiTextfield />
+  </tui-textfield>
+  <tui-error formControlName="name" [error]="[] | tuiFieldError | async" />
+  <tui-textfield>
+    <label tuiLabel>Number</label>
+    <input formControlName="number" placeholder="123" tuiTextfield />
+  </tui-textfield>
+  <tui-error formControlName="number" [error]="[] | tuiFieldError | async" />
+  <footer>
+    <button appearance="secondary" tuiButton type="button" (click)="cancel()">
+      Cancel
+    </button>
+    <button tuiButton type="submit" (click)="create()">Create</button>
+  </footer>
+</form>
+
+<div style="height: 30px"></div>
