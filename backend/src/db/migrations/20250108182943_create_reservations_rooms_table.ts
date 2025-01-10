@@ -6,6 +6,8 @@ export async function up(knex: Knex): Promise<void> {
     table.foreign("reservation_id").references("reservations.id");
     table.uuid("room_id");
     table.foreign("room_id").references("rooms.id");
+
+    table.unique(["reservation_id", "room_id"]);
   });
 }
 
