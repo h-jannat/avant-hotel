@@ -34,25 +34,21 @@ export const routes: Routes = [
   {
     path: guestsPath,
     component: GuestsComponent,
-    children: [
-      { path: createPath, component: CreateGuestComponent },
-      {
-        path: detailsPath,
-        component: GuestDetailsComponent,
-        children: [{ path: editPath, component: EditGuestComponent }],
-      },
-    ],
+    children: [{ path: createPath, component: CreateGuestComponent }],
+  },
+  {
+    path: `${guestsPath}/${detailsPath}`,
+    component: GuestDetailsComponent,
+    children: [{ path: editPath, component: EditGuestComponent }],
   },
   {
     path: reservationsPath,
     component: ReservationsComponent,
-    children: [
-      { path: createPath, component: CreateReservationComponent },
-      {
-        path: detailsPath,
-        component: ReservationDetailsComponent,
-        children: [{ path: editPath, component: EditReservationComponent }],
-      },
-    ],
+    children: [{ path: createPath, component: CreateReservationComponent }],
+  },
+  {
+    path: `${reservationsPath}/${detailsPath}`,
+    component: ReservationDetailsComponent,
+    children: [{ path: editPath, component: EditReservationComponent }],
   },
 ];
