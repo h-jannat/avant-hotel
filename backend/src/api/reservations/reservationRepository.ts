@@ -46,6 +46,14 @@ export class ReservationRepository {
     return db.select().from(this.tableName).where("id", id).first();
   }
 
+  async findUpComingByGuestIdAsync(guestId: string): Promise<any> {
+    return db
+      .select()
+      .from(this.tableName)
+      .where("guest_id", guestId)
+      .andWhere("start_date", ">", new Date());
+  }
+
   async createAsync(createData: any): Promise<any> {
     const { guestId, startDate, endDate, roomIds } = createData;
 
