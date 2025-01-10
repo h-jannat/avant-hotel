@@ -6,10 +6,11 @@ const config: { [key: string]: Knex.Config } = {
   development: {
     client: "postgresql",
     connection: {
+      host: process.env.DB_HOST,
       database: process.env.DB_NAME,
       user: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
-      port: 6543,
+      port: process.env.DB_PORT as unknown as number,
     },
     pool: {
       min: 2,
@@ -23,10 +24,11 @@ const config: { [key: string]: Knex.Config } = {
   staging: {
     client: "postgresql",
     connection: {
+      host: process.env.DB_HOST,
       database: process.env.DB_NAME,
       user: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
-      port: 6543,
+      port: process.env.DB_PORT as unknown as number,
     },
     pool: {
       min: 2,
@@ -40,10 +42,11 @@ const config: { [key: string]: Knex.Config } = {
   production: {
     client: "postgresql",
     connection: {
+      host: process.env.DB_HOST,
       database: process.env.DB_NAME,
       user: process.env.DB_USER,
       password: process.env.DB_PASSWORD,
-      port: 6543,
+      port: process.env.DB_PORT as unknown as number,
     },
     pool: {
       min: 2,
