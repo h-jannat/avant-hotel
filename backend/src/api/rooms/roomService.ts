@@ -27,10 +27,11 @@ export class UserService {
         sortBy,
         sortDirection,
       });
+      const total = await this.roomRepository.findTotal();
       if (!rooms || rooms.length === 0) {
-        return null;
+        return { message: "No rooms found" };
       }
-      return rooms;
+      return { data: rooms, total: total[0]["count"] };
     } catch (ex) {
       const errorMessage = `Error finding all rooms: $${(ex as Error).message}`;
       logger.error(errorMessage);
@@ -43,7 +44,7 @@ export class UserService {
     try {
       const room = await this.roomRepository.findByIdAsync(id);
       if (!room) {
-        return null;
+        return { message: `Room with id ${id} not found` };
       }
       return room;
     } catch (ex) {
@@ -63,7 +64,7 @@ export class UserService {
     } catch (ex) {
       const errorMessage = `Error creating room ${ex}`;
       logger.error(errorMessage);
-      return null;
+      return { message: errorMessage };
     }
   }
 
