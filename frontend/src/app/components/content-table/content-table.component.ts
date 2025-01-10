@@ -51,6 +51,8 @@ export class ContentTableComponent {
   }
 
   navigateTo(item: any) {
-    this.router.navigate([item.id], { relativeTo: this.route });
+    this.router.navigate([item.id, { item: JSON.stringify(item) }], {
+      relativeTo: this.route,
+    });
   }
 }
