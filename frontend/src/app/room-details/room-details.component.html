@@ -1,1 +1,39 @@
-<p>room-details works!</p>
+<div class="room-details">
+  <app-page-header title="Room Details" type="view"> </app-page-header>
+  <div style="height: 30px"></div>
+  <router-outlet></router-outlet>
+  <div *ngIf="room">
+    <p><strong>Name:</strong> {{ room.name }}</p>
+    <p><strong>Number:</strong> {{ room.number }}</p>
+  </div>
+
+  <div *ngIf="room?.current_reservation">
+    <h3>Current Reservation</h3>
+    <p>
+      <strong>Guest Name:</strong> {{ room.current_reservation.guest_name }}
+    </p>
+    <p>
+      <strong>Check-in Date:</strong>
+      {{ room.current_reservation.start_date | date }}
+    </p>
+    <p>
+      <strong>Check-out Date:</strong>
+      {{ room.current_reservation.end_date | date }}
+    </p>
+  </div>
+
+  <div *ngIf="room?.upcoming_reservations.length > 0">
+    <h3>Upcoming Reservations</h3>
+    <ul>
+      <li *ngFor="let reservation of room.upcoming_reservations">
+        <p><strong>Guest Name:</strong> {{ reservation.guest_name }}</p>
+        <p>
+          <strong>Check-in Date:</strong> {{ reservation.start_date | date }}
+        </p>
+        <p>
+          <strong>Check-out Date:</strong> {{ reservation.end_date | date }}
+        </p>
+      </li>
+    </ul>
+  </div>
+</div>
