@@ -1,1 +1,12 @@
-<p>reservation-details works!</p>
+<div class="reservation-details">
+  <app-page-header title="Reservation Details" type="details">
+  </app-page-header>
+  <div style="height: 30px"></div>
+
+  <div *ngIf="reservation">
+    <p><strong>Guest Name:</strong> {{ reservation.guestName }}</p>
+    <p><strong>Start Date:</strong> {{ reservation.startDate | date }}</p>
+    <p><strong>End Date:</strong> {{ reservation.endDate | date }}</p>
+    <p><strong>Room Numbers:</strong>{{ reservation.roomNumbers }}</p>
+  </div>
+</div>

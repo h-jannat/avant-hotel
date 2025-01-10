@@ -1,1 +1,38 @@
-<p>create-guest works!</p>
+<form
+  tuiAppearance="outline"
+  tuiCardLarge
+  tuiForm="m"
+  [formGroup]="form"
+  [style.max-width.rem]="32"
+>
+  <header tuiHeader="s">
+    <h2>Create a new guest</h2>
+  </header>
+  <tui-textfield>
+    <label tuiLabel>Name</label>
+    <input formControlName="name" placeholder="Guest" tuiTextfield />
+  </tui-textfield>
+  <tui-error formControlName="name" [error]="[] | tuiFieldError | async" />
+  <tui-textfield>
+    <label tuiLabel>Email</label>
+    <input
+      formControlName="email"
+      placeholder="email@example.com"
+      tuiTextfield
+    />
+  </tui-textfield>
+  <tui-error formControlName="email" [error]="[] | tuiFieldError | async" />
+  <tui-textfield>
+    <label tuiLabel>Phone</label>
+    <input formControlName="phone" placeholder="0111111" tuiTextfield />
+  </tui-textfield>
+  <tui-error formControlName="phone" [error]="[] | tuiFieldError | async" />
+  <footer>
+    <button appearance="secondary" tuiButton type="button" (click)="cancel()">
+      Cancel
+    </button>
+    <button tuiButton type="submit" (click)="create()">Create</button>
+  </footer>
+</form>
+
+<div style="height: 30px"></div>

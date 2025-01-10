@@ -8,7 +8,11 @@
     >
       +
     </button>
-    <button *ngIf="type === 'view'" tuiButton="primary" (click)="onEditClick()">
+    <button
+      *ngIf="type === 'details'"
+      tuiButton="primary"
+      (click)="onEditClick()"
+    >
       𓂃🖌
     </button>
     <!-- <div tuiSubtitle>Subtitle</div> -->

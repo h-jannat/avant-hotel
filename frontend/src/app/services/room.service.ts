@@ -9,7 +9,7 @@ export class RoomService {
 
   getRooms(page: number, limit: number, sortBy: string, sortDirection: string) {
     return this.http.get(
-      `${this.apiUrl}?page=${page}&limit=${limit}&sort_by=${sortBy}&sort_direction=${sortDirection}`
+      `${this.apiUrl}?page=${page}&limit=${limit}&sortBy=${sortBy}&sortDirection=${sortDirection}`
     );
   }
 

@@ -1,1 +1,32 @@
-<p>guest-details works!</p>
+<div class="guest-details">
+  <app-page-header title="Guest Details" type="details"> </app-page-header>
+  <div style="height: 30px"></div>
+  <router-outlet></router-outlet>
+
+  <div *ngIf="guest">
+    <p><strong>Name:</strong> {{ guest.name }}</p>
+    <p><strong>Email:</strong> {{ guest.email }}</p>
+    <p><strong>Phone:</strong> {{ guest.phone }}</p>
+    <p><strong>Created At:</strong> {{ guest.created_at | date }}</p>
+    <p><strong>Updated At:</strong> {{ guest.updated_at | date }}</p>
+
+    <p>
+      <strong>Total Reservations:</strong> {{ guest.total_reservations ?? "0" }}
+    </p>
+  </div>
+
+  <!-- <div *ngIf="guest?.current_reservation">
+    <h3>Current Reservation</h3>
+    <p>
+      <strong>Room Number:</strong> {{ guest.current_reservation.room_number }}
+    </p>
+    <p>
+      <strong>Check-in Date:</strong>
+      {{ guest.current_reservation.start_date | date }}
+    </p>
+    <p>
+      <strong>Check-out Date:</strong>
+      {{ guest.current_reservation.end_date | date }}
+    </p>
+  </div> -->
+</div>
