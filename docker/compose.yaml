@@ -10,6 +10,16 @@ services:
     ports:
       - "6543:5432"
 
+  backend:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+
 networks:
   public:
   private:
