@@ -39,8 +39,9 @@ export class ReservationService {
 
       for (let reservation of reservations) {
         const rooms: any[] = [];
+        console.log(reservation.rooms);
         for (let roomId of reservation.rooms) {
-          const room = await this.roomRepository.findByIdAsync(roomId);
+          const room = await this.roomRepository.findByIdAsync(roomId, false);
           rooms.push(room);
         }
         reservation.rooms = rooms;

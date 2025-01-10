@@ -1,11 +1,17 @@
 import { GuestRepository } from "@/api/guests/guestRepository";
 import { logger } from "@/app";
+import { ReservationRepository } from "../reservations/reservationRepository";
 
 export class GuestService {
   private guestRepository: GuestRepository;
+  private reservationRepository: ReservationRepository;
 
-  constructor(repository: GuestRepository = new GuestRepository()) {
+  constructor(
+    repository: GuestRepository = new GuestRepository(),
+    reservationRepository: ReservationRepository = new ReservationRepository()
+  ) {
     this.guestRepository = repository;
+    this.reservationRepository = reservationRepository;
   }
 
   // Retrieves all guests from the database
