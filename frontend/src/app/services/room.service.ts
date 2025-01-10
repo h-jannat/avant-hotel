@@ -1,17 +1,27 @@
-import { Injectable, resource } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
-export class UserService {
-  userResource = resource({
-    loader: async (params) => {
-      const response = await fetch(`/api/users?sort=${params.request.sort}`);
-      if (!response.ok) {
-        throw new Error('Failed to fetch users');
-      }
-      return await response.json();
-    },
-  });
-  reloadUsers(sortOrder: 'asc' | 'desc') {
-    this.userResource.reload({ request: { sort: sortOrder } });
+export class RoomService {
+  private apiUrl = 'http://localhost:3000/rooms';
+
+  constructor(private http: HttpClient) {}
+
+  getRooms(page: number, limit: number, sortBy: string, sortDirection: string) {
+    return this.http.get(
+      `${this.apiUrl}?page=${page}&limit=${limit}&sort_by=${sortBy}&sort_direction=${sortDirection}`
+    );
+  }
+
+  getRoomById(id: string) {
+    return this.http.get(`${this.apiUrl}/${id}`);
+  }
+
+  createRoom(room: any) {
+    return this.http.post(this.apiUrl, room);
+  }
+
+  updateRoom(id: string, room: any) {
+    return this.http.put(`${this.apiUrl}/${id}`, room);
   }
 }
