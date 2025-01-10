@@ -1,6 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { TuiActiveZone } from '@taiga-ui/cdk/directives/active-zone';
+import { TuiObscured } from '@taiga-ui/cdk/directives/obscured';
+import { TuiButton, TuiDropdown } from '@taiga-ui/core';
+import { TuiChevron } from '@taiga-ui/kit';
 import { ContentTableComponent } from '../components/content-table/content-table.component';
 import { PageHeaderComponent } from '../components/page-header/page-header.component';
 import { RoomService } from '../services/room.service';
@@ -8,6 +13,12 @@ import { RoomService } from '../services/room.service';
 @Component({
   selector: 'app-rooms',
   imports: [
+    CommonModule,
+    TuiActiveZone,
+    TuiButton,
+    TuiChevron,
+    TuiDropdown,
+    TuiObscured,
     ContentTableComponent,
     PageHeaderComponent,
     HttpClientModule,
@@ -24,6 +35,10 @@ export class RoomsComponent {
   size = 10;
   length = 0;
   totalItems = 0;
+  protected openOrderByDropDown = false;
+  protected openOrderDirectionDropDown = false;
+  protected orderDirection = 'ASC';
+  protected orderBy = 'name';
 
   constructor(
     private roomService: RoomService,
@@ -66,5 +81,46 @@ export class RoomsComponent {
         });
       }
     });
+  }
+
+  //Order by dropdown
+
+  protected onClickOrderByDropDown(): void {
+    this.openOrderByDropDown = !this.openOrderByDropDown;
+  }
+
+  protected onObscuredOrderByDropDown(obscured: boolean): void {
+    if (obscured) {
+      this.openOrderByDropDown = false;
+    }
+  }
+
+  protected onActiveZoneOrderByDropDown(active: boolean): void {
+    this.openOrderByDropDown = active && this.openOrderByDropDown;
+  }
+
+  protected onOrderByDropDownItemClick(label: string) {
+    this.orderBy = label;
+    this.fetchRooms(this.index, label, this.orderDirection);
+  }
+
+  //Order Direction Dropdown
+  protected onClickOrderDirectionDropDown(): void {
+    this.openOrderDirectionDropDown = !this.openOrderDirectionDropDown;
+  }
+
+  protected onObscuredOrderDirectionDropDown(obscured: boolean): void {
+    if (obscured) {
+      this.openOrderDirectionDropDown = false;
+    }
+  }
+
+  protected onActiveZoneOrderDirectionDropDown(active: boolean): void {
+    this.openOrderDirectionDropDown = active && this.openOrderDirectionDropDown;
+  }
+
+  protected onOrderDirectionDropDownItemClick(direction: string) {
+    this.orderDirection = direction;
+    this.fetchRooms(this.index, this.orderBy, direction);
   }
 }

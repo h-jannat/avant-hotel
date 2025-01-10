@@ -2,6 +2,56 @@
   <app-page-header title="Rooms" type="list"> </app-page-header>
   <div style="height: 30px"></div>
   <router-outlet></router-outlet>
+  <button
+    tuiButton
+    tuiChevron
+    type="button"
+    [tuiDropdown]="orderByDropdownContent"
+    [tuiDropdownManual]="openOrderByDropDown"
+    [tuiObscuredEnabled]="openOrderByDropDown"
+    (click)="onClickOrderByDropDown()"
+    (tuiActiveZoneChange)="onActiveZoneOrderByDropDown($event)"
+    (tuiObscured)="onObscuredOrderByDropDown($event)"
+  >
+    Sort by
+    <ng-template #orderByDropdownContent>
+      <div
+        class="dropdownItem"
+        *ngFor="let headName of ['name', 'number']"
+        (click)="onOrderByDropDownItemClick(headName)"
+        class="dropdownItem"
+      >
+        {{ headName }}
+      </div>
+    </ng-template>
+  </button>
+
+  <button
+    class="orderDropDown"
+    tuiButton
+    tuiChevron
+    type="button"
+    [tuiDropdown]="dropdownContent"
+    [tuiDropdownManual]="openOrderDirectionDropDown"
+    [tuiObscuredEnabled]="openOrderDirectionDropDown"
+    (click)="onClickOrderDirectionDropDown()"
+    (tuiActiveZoneChange)="onActiveZoneOrderDirectionDropDown($event)"
+    (tuiObscured)="onObscuredOrderDirectionDropDown($event)"
+  >
+    Sort Direction
+    <ng-template #dropdownContent>
+      <div
+        class="dropdownItem"
+        *ngFor="let direction of ['ASC', 'DESC']"
+        (click)="onOrderDirectionDropDownItemClick(direction)"
+        class="dropdownItem"
+      >
+        {{ direction == "ASC" ? "Ascending" : "Descending" }}
+      </div>
+    </ng-template>
+  </button>
+
+  <div style="height: 10px"></div>
   <app-content-table
     [tableHeads]="tableHeads"
     [data]="data"
