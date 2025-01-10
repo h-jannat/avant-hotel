@@ -27,7 +27,7 @@ class ReservationController {
     res: Response
   ) => {
     const reservation = await reservationService.findById(req.params.id);
-    res.json(reservation).send();
+    res.json(reservation);
   };
 
   public createReservation: RequestHandler = async (
@@ -35,7 +35,7 @@ class ReservationController {
     res: Response
   ) => {
     const reservation = await reservationService.create(req.body);
-    res.json(reservation).send();
+    res.json(reservation);
   };
 
   public updateReservation: RequestHandler = async (
@@ -44,7 +44,7 @@ class ReservationController {
   ) => {
     logger.debug(`id = ${req.params.id}`);
     const result = await reservationService.update(req.params.id, req.body);
-    res.json(result).send();
+    res.json(result);
   };
 }
 

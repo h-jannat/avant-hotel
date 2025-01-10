@@ -26,18 +26,18 @@ class GuestController {
 
   public getGuest: RequestHandler = async (req: Request, res: Response) => {
     const guest = await guestService.findById(req.params.id);
-    res.json(guest).send();
+    res.json(guest);
   };
 
   public createGuest: RequestHandler = async (req: Request, res: Response) => {
     await guestService.create(req.body);
-    res.json({ message: "Guest is created" }).send();
+    res.json({ message: "Guest is created" });
   };
 
   public updateGuest: RequestHandler = async (req: Request, res: Response) => {
     logger.debug(`id = ${req.params.id}`);
     const result = await guestService.update(req.params.id, req.body);
-    res.json(result).send();
+    res.json(result);
   };
 }
 
