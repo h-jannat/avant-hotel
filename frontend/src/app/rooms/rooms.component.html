@@ -1,6 +1,7 @@
 <div>
-  <app-page-header title="Rooms"></app-page-header>
+  <app-page-header title="Rooms" type="list"> </app-page-header>
   <div style="height: 30px"></div>
+  <router-outlet></router-outlet>
   <app-content-table
     [tableHeads]="tableHeads"
     [data]="data"
@@ -8,5 +9,6 @@
     [size]="size"
     [length]="length"
     [totalItems]="totalItems"
+    (onPageChange)="goToPage($event)"
   />
 </div>
