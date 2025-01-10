@@ -17,6 +17,7 @@ export class GuestRepository {
     return db
       .select()
       .from(this.tableName)
+
       .orderBy(sortBy ? sortBy : "name", sortDirection ?? "asc")
       .offset(offset)
       .limit(limit);
@@ -28,21 +29,20 @@ export class GuestRepository {
 
   async findByIdAsync(id: string): Promise<any> {
     return db
-      .select()
+      .select(
+        "guests.*",
+        db.raw("COALESCE(total_reservations, 0) as total_past_reservations")
+      )
       .from(this.tableName)
       .where("id", id)
       .first()
       .leftJoin(
         db
-          .select("reservations_guests.guest_id")
-          .count("reservations_guests as total_reservations")
-          .from("reservations_guests")
-          .join(
-            "reservations",
-            "reservations_guests.reservation_id",
-            "reservations.id"
-          )
-          .groupBy("reservations_guests.guest_id")
+          .select("reservations.guest_id")
+          .count("reservations as total_reservations")
+          .from("reservations")
+          .where("reservations.start_date", "<", db.raw("now()"))
+          .groupBy("reservations.guest_id")
           .as("guest_reservations"),
         "guests.id",
         "guest_reservations.guest_id"
