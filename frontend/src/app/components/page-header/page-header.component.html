@@ -1,6 +1,16 @@
 <div tuiHeader="xxl">
   <h1 tuiTitle>
     {{ title }}
+    <button
+      *ngIf="type === 'list'"
+      tuiButton="primary"
+      (click)="onCreateClick()"
+    >
+      +
+    </button>
+    <button *ngIf="type === 'view'" tuiButton="primary" (click)="onEditClick()">
+      𓂃🖌
+    </button>
     <!-- <div tuiSubtitle>Subtitle</div> -->
   </h1>
 </div>
