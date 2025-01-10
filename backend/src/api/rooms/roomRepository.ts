@@ -52,53 +52,63 @@ export class RoomRepository {
     return db(this.tableName).count();
   }
 
-  async findByIdAsync(id: string): Promise<any> {
+  async findByIdAsync(
+    id: string,
+    joinReservations: boolean = true
+  ): Promise<any> {
     const room = await db.select().from(this.tableName).where("id", id).first();
 
     if (!room) {
       return { message: `Room with id ${id} not found` };
     }
-
-    const currentReservation = await db("reservations_rooms")
-      .join(
-        "reservations",
-        "reservations_rooms.reservation_id",
-        "reservations.id"
-      )
-      .join("guests", "reservations.guest_id", "guests.id")
-      .select(
-        "reservations.id as reservation_id",
-        "reservations.start_date",
-        "reservations.end_date",
-        "guests.name as guest_name"
-      )
-      .where("reservations_rooms.room_id", id)
-      .andWhere("reservations.start_date", "<=", new Date())
-      .andWhere("reservations.end_date", ">=", new Date())
-      .first();
-
-    const upcomingReservations = await db("reservations_rooms")
-      .join(
-        "reservations",
-        "reservations_rooms.reservation_id",
-        "reservations.id"
-      )
-      .join("guests", "reservations.guest_id", "guests.id")
-      .select(
-        "reservations.id as reservation_id",
-        "reservations.start_date",
-        "reservations.end_date",
-        "guests.name as guest_name"
-      )
-      .where("reservations_rooms.room_id", id)
-      .andWhere("reservations.start_date", ">", new Date())
-      .orderBy("reservations.start_date", "asc");
-
-    return {
+    let result = {
       ...room,
-      current_reservation: currentReservation,
-      upcoming_reservations: upcomingReservations,
     };
+    if (joinReservations) {
+      //current reservations
+      const currentReservation = await db("reservations_rooms")
+        .join(
+          "reservations",
+          "reservations_rooms.reservation_id",
+          "reservations.id"
+        )
+        .join("guests", "reservations.guest_id", "guests.id")
+        .select(
+          "reservations.id as reservation_id",
+          "reservations.start_date",
+          "reservations.end_date",
+          "guests.name as guest_name"
+        )
+        .where("reservations_rooms.room_id", id)
+        .andWhere("reservations.start_date", "<=", new Date())
+        .andWhere("reservations.end_date", ">=", new Date())
+        .first();
+
+      //upcoming reservations
+      const upcomingReservations = await db("reservations_rooms")
+        .join(
+          "reservations",
+          "reservations_rooms.reservation_id",
+          "reservations.id"
+        )
+        .join("guests", "reservations.guest_id", "guests.id")
+        .select(
+          "reservations.id as reservation_id",
+          "reservations.start_date",
+          "reservations.end_date",
+          "guests.name as guest_name"
+        )
+        .where("reservations_rooms.room_id", id)
+        .andWhere("reservations.start_date", ">", new Date())
+        .orderBy("reservations.start_date", "asc");
+
+      result = {
+        ...result,
+        current_reservation: currentReservation,
+        upcoming_reservations: upcomingReservations,
+      };
+    }
+    return result;
   }
 
   async createAsync(createData: any): Promise<any> {
